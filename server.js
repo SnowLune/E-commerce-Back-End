@@ -1,18 +1,8 @@
 const express = require('express');
 const routes = require('./routes');
 
-require("dotenv").config();
 // import sequelize connection
-const Sequelize = require("sequelize");
-
-const sequelize = new Sequelize("marketplace", process.env.MYSQL_USER, 
-   process.env.MYSQL_PASS, 
-   {
-      dialect: "mysql",
-      host: "localhost"
-   }
-);
-
+const sequelize = require("./config/connection");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,6 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 // sync sequelize models to the database, then turn on the server
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
-});
+sequelize.sync(
+   { 
+      force: false
+   }
+)
+   .then( ()=> {
+      app.listen(PORT, () => {
+         console.log(`App listening on port ${PORT}!`);
+      });
+   })
+   .catch((err) => {
+      console.error(err);
+   });
+         
