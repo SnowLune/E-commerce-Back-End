@@ -15,7 +15,7 @@ A back-end for an e-commerce website using Sequelize and Express
 run `npm i`
 
 ## Video Walkthrough
-[Video Walkthrough on YouTube](https://www.youtube.com/watch?v=xMy0Wvm6Azc)
+[Video Walkthrough on YouTube](https://www.youtube.com/watch?v=wgRdwa9TBpU)
 ## Usage
 run `node server.js`
 
